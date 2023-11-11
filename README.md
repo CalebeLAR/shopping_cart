@@ -5,7 +5,7 @@ Desenvolvido com orientação a testes. TDD (Test Driven Development). 🔬
 **como usar?**  
 * Para usar você precisa usar a extenção Live Server ou similar, para abrir o html no navegador.  
 
-intale as dependências: 
+instale as dependências: 
 ```bash
 npm i
 ```
