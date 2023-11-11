@@ -1,5 +1,3 @@
-// const fetch = require('node-fetch');
-
 const fetchItem = async (ItemID) => {  
   if (!ItemID) {
     throw new Error('You must provide an url');

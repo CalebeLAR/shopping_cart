@@ -34,7 +34,7 @@ const formatThatAreInHTML = (savedProducts) => {
   const firstFormatting = savedProducts.split('<li class="cart__item">'); // devolve um array similar à ['', 'SKU: id | NAME: nomedoproduto | PRICE: preço</li>', ... outros]
   const secondFormatting = firstFormatting.map((li) => (li.replace('</li>', ''))); // devolve um array similar à ['', 'SKU: id | NAME: nomedoproduto | PRICE: preço', ... outros] sem </li> no final
   let detailsProductList = secondFormatting.map((s) => (s.split(' |')));// devolve um array similar à [[''], ["SKU: id "], [" NAME: nomedoproduto "], [" PRICE: preço' "]] com um array vazio no inicio
-  detailsProductList = detailsProductList.splice(1); // devolve um array similar à [["SKU: id "], [" NAME: nomedoproduto "], [" PRICE: preço' "]] com arrays só com os valores uteis
+  detailsProductList = detailsProductList.splice(1); // remove o array vazio no inicio da lista e devolve um array similar à [["SKU: id "], [" NAME: nomedoproduto "], [" PRICE: preço' "]] com arrays só com os valores uteis
   return detailsProductList;
   };
 
@@ -129,7 +129,7 @@ const createCartItemComponents = async () => {
 };
 // Função implementada no requisito 8
 const rescueSavedItems = () => {
-  // para cada produto salvo no local storage, monta um elemento do produto e coloca no carrinho.
+  // para cada produto salvo no local storage: monta um elemento do produto e coloca no carrinho.
   const localStorage = getSavedCartItems();
   const list = formatThatAreInHTML(localStorage);
   list.forEach((product) => {
@@ -150,6 +150,9 @@ const emptyCart = () => {
   const emptyCartButton = document.querySelector('.empty-cart');
   emptyCartButton.addEventListener('click', () => { 
     CART__ITEMS.innerHTML = null;
+    const totalPrice = document.querySelector('.total-price');
+    totalPrice.innerText = 0;
+    
     saveCartItems(CART__ITEMS.innerHTML); 
   });
 };
